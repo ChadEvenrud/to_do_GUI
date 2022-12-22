@@ -1,15 +1,15 @@
-import requests
-import random
+import PySimpleGUI as sg 
 
-data_request = requests.get("https://opentdb.com/api.php?amount=10&category=21&difficulty=medium&type=multiple")
+label1 = sg.Text("Select files to compress: ")
+input1 = sg.Input()
+choose_button1 = sg.FileBrowse("Choose")
 
-data_file = data_request.json()
+label2 = sg.Text("Select destination folder: ")
+input2 = sg.Input()
+choose_button2 = sg.FolderBrowse("Choose")
 
-for data in data_file["results"]:
-    question = data["question"]
-    correct_answer = data["correct_answer"]
-    wrong_answers = data["incorrect_answers"]
-    
-    for index, option in enumerate(wrong_answers):
-        print(index,option)
-                
+window = sg.Window("File Compressor", layout=[[label1, input1, choose_button1], 
+                                              [label2, input2, choose_button2]])
+
+window.read()
+window.close()
